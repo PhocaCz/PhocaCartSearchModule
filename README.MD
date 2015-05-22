@@ -1,0 +1,1 @@
+Phoca Cart Search Module is Joomla! CMS extension. Module which displays searching form - to search Phoca Cart products.
