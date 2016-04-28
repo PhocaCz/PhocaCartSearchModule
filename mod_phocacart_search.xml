@@ -2,7 +2,7 @@
 <extension type="module" client="site" method="upgrade" version="3">
 	<name>Phoca Cart Search</name>
 	<author>Jan Pavelka (www.phoca.cz)</author>
-	<creationDate>05/04/2015</creationDate>
+	<creationDate>08/02/2016</creationDate>
 	<authorEmail></authorEmail>
 	<authorUrl>www.phoca.cz</authorUrl>
 	<copyright>Jan Pavelka</copyright>

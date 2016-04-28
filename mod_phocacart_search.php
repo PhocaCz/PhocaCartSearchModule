@@ -10,7 +10,9 @@
 defined('_JEXEC') or die('Restricted access');// no direct access
 
 if (!JComponentHelper::isEnabled('com_phocacart', true)) {
-	return JError::raiseError(JText::_('Phoca Cart Error'), JText::_('Phoca Cart is not installed on your system'));
+	$app = JFactory::getApplication();
+	$app->enqueueMessage(JText::_('Phoca Cart Error'), JText::_('Phoca Cart is not installed on your system'), 'error');
+	return;
 }
 if (! class_exists('PhocaCartLoader')) {
     require_once( JPATH_ADMINISTRATOR.'/components/com_phocacart/libraries/loader.php');
