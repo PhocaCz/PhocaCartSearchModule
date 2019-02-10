@@ -7,14 +7,18 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
  */
  
-defined('_JEXEC') or die('Restricted access');// no direct access
+defined('_JEXEC') or die;// no direct access
 
 if (!JComponentHelper::isEnabled('com_phocacart', true)) {
 	$app = JFactory::getApplication();
 	$app->enqueueMessage(JText::_('Phoca Cart Error'), JText::_('Phoca Cart is not installed on your system'), 'error');
 	return;
 }
-if (! class_exists('PhocaCartLoader')) {
+
+JLoader::registerPrefix('Phocacart', JPATH_ADMINISTRATOR . '/components/com_phocacart/libraries/phocacart');
+
+/*
+if (! class_exists('PhocacartLoader')) {
     require_once( JPATH_ADMINISTRATOR.'/components/com_phocacart/libraries/loader.php');
 }
 
@@ -22,13 +26,18 @@ phocacartimport('phocacart.utils.settings');
 phocacartimport('phocacart.search.search');
 phocacartimport('phocacart.filter.filter');
 phocacartimport('phocacart.path.route');
-phocacartimport('phocacart.render.renderjs');
+phocacartimport('phocacart.render.renderjs');*/
 
-$lang 						= JFactory::getLanguage();
+$lang = JFactory::getLanguage();
+//$lang->load('com_phocacart.sys');
 $lang->load('com_phocacart');
+
+$moduleclass_sfx 					= htmlspecialchars($params->get('moduleclass_sfx'), ENT_COMPAT, 'UTF-8');
+
+
 $document					= JFactory::getDocument();
 
-$search						= new PhocaCartSearch();
+$search						= new PhocacartSearch();
 
 /* See documentation of Phoca Cart Filter module - commented code for description of functions:
  * - phSetFilter
@@ -52,21 +61,34 @@ $search						= new PhocaCartSearch();
 
 $document->addScript(JURI::root(true).'/media/com_phocacart/js/filter/jquery.ba-bbq.min.js');
 $document->addScript(JURI::root(true).'/media/com_phocacart/js/filter/filter.js');
-$isItemsView 				= PhocaCartRoute::isItemsView();
-$urlItemsView 				= PhocaCartRoute::getJsItemsRoute();// With category
-$urlItemsViewWithoutParams 	= PhocaCartRoute::getJsItemsRouteWithoutParams();// Without category
+$isItemsView 				= PhocacartRoute::isItemsView();
+$urlItemsView 				= PhocacartRoute::getJsItemsRoute();// With category
+$urlItemsViewWithoutParams 	= PhocacartRoute::getJsItemsRouteWithoutParams();// Without category
 
 $p['search_options']		= $params->get( 'search_options', 0 );
+$p['hide_buttons']			= $params->get( 'hide_buttons', 0 );
+$p['display_inner_icon']	= $params->get( 'display_inner_icon', 0 );
+$p['load_component_media']	= $params->get( 'load_component_media', 0 );
+
+if ($p['load_component_media'] == 1) {
+	$media = new PhocacartRenderMedia();
+	$media->loadBootstrap();
+} else {
+	JHTML::stylesheet('media/com_phocacart/css/main.css' );
+}
 
 //$jsPart1 = 'var currentUrlParams	= jQuery.param.querystring();'
 //		  .'document.location 		= jQuery.param.querystring(urlItemsView, currentUrlParams, 2);';
 //$jsPart1 = 'document.location 		= urlItemsView';
-$jsPart2 = PhocaCartRenderJs::renderLoaderFullOverlay();
+$jsPart2 = PhocacartRenderJs::renderLoaderFullOverlay();
 
-$js	  = array();	
+$js	  = array();
+$js[] = ' ';	
+$js[] = '/* Function phChangeSearch*/ ';
 $js[] = 'function phChangeSearch(param, value, formAction) {';
 $js[] = '   var isItemsView		= '.(int)$isItemsView.';';
 $js[] = '   var urlItemsView	= \''.$urlItemsView.'\';';
+$js[] = '	var phA = 1;';
 $js[] = '   ';
 //$js[] = '   value = phEncode(value);';
 $js[] = '   if (formAction == 1) {';
@@ -80,12 +102,14 @@ if ($p['search_options'] == 1) {
 	$js[] = '         isItemsView = 0;';// When options are disabled we always search without filtering
 }
 
-$js[] = '     phSetFilter(param, value, isItemsView, urlItemsView, 1, 0);';
+$js[] = '      phA = phSetFilter(param, value, isItemsView, urlItemsView, 1, 0);';
 $js[] = '   } else {';
-$js[] = '      phRemoveFilter(param, value, isItemsView, urlItemsView, 1,0);';
+$js[] = '      phA = phRemoveFilter(param, value, isItemsView, urlItemsView, 1,0);';
+//$js[] = '    ';
 $js[] = '   }';
 $js[] = '	'.$jsPart2;
 $js[] = '}';
+$js[] = ' ';	
 
 $document->addScriptDeclaration(implode("\n", $js));
 require(JModuleHelper::getLayoutPath('mod_phocacart_search'));
