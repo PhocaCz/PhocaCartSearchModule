@@ -6,7 +6,7 @@
  * @copyright Copyright (C) Jan Pavelka www.phoca.cz
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
  */
- 
+
 defined('_JEXEC') or die;// no direct access
 
 if (!JComponentHelper::isEnabled('com_phocacart', true)) {
@@ -57,7 +57,7 @@ $search						= new PhocacartSearch();
  *      Default items view page  means an items view without any paramaters
  *      This is this case: .'       phSetFilter(param, value, 0, urlItemsView, 1, 0);' - zero after value means not items view;
  * - only selected products (filtered products - they are filtered by filter parameter) - url stay the same with filter parameters
- */ 
+ */
 
 $document->addScript(JURI::root(true).'/media/com_phocacart/js/filter/jquery.ba-bbq.min.js');
 $document->addScript(JURI::root(true).'/media/com_phocacart/js/filter/filter.js');
@@ -69,6 +69,7 @@ $p['search_options']		= $params->get( 'search_options', 0 );
 $p['hide_buttons']			= $params->get( 'hide_buttons', 0 );
 $p['display_inner_icon']	= $params->get( 'display_inner_icon', 0 );
 $p['load_component_media']	= $params->get( 'load_component_media', 0 );
+$p['placeholder_text']	    = $params->get( 'placeholder_text', '' );
 
 if ($p['load_component_media'] == 1) {
 	$media = new PhocacartRenderMedia();
@@ -83,7 +84,7 @@ if ($p['load_component_media'] == 1) {
 $jsPart2 = PhocacartRenderJs::renderLoaderFullOverlay();
 
 $js	  = array();
-$js[] = ' ';	
+$js[] = ' ';
 $js[] = '/* Function phChangeSearch*/ ';
 $js[] = 'function phChangeSearch(param, value, formAction) {';
 $js[] = '   var isItemsView		= '.(int)$isItemsView.';';
@@ -109,7 +110,7 @@ $js[] = '      phA = phRemoveFilter(param, value, isItemsView, urlItemsView, 1,0
 $js[] = '   }';
 $js[] = '	'.$jsPart2;
 $js[] = '}';
-$js[] = ' ';	
+$js[] = ' ';
 
 $document->addScriptDeclaration(implode("\n", $js));
 require(JModuleHelper::getLayoutPath('mod_phocacart_search'));

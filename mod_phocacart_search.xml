@@ -2,12 +2,12 @@
 <extension type="module" client="site" method="upgrade" version="3">
 	<name>mod_phocacart_search</name>
 	<author>Jan Pavelka (www.phoca.cz)</author>
-	<creationDate>01/05/2019</creationDate>
+	<creationDate>26/05/2019</creationDate>
 	<authorEmail></authorEmail>
 	<authorUrl>https://www.phoca.cz</authorUrl>
 	<copyright>Jan Pavelka</copyright>
 	<license>GNU/GPL</license>
-	<version>3.1.9</version>
+	<version>3.2.0</version>
 	<description>MOD_PHOCACART_SEARCH_DESCRIPTION</description>
 	<projectName>PhocaCartSearchModule</projectName>
 
@@ -23,34 +23,36 @@
 	</languages>
 	
 	<config>
-		<fields name="params">
-			<fieldset name="basic">
-			
-			<field name="search_options" type="radio" class="btn-group btn-group-yesno" default="0" label="MOD_PHOCACART_SEARCH_FIELD_ENABLE_SEARCH_OPTIONS_LABEL" description="MOD_PHOCACART_SEARCH_FIELD_ENABLE_SEARCH_OPTIONS_DESC">
-	<option value="1">MOD_PHOCACART_SEARCH_YES</option>
-	<option value="0">MOD_PHOCACART_SEARCH_NO</option>
-</field>
+        <fields name="params">
+            <fieldset name="basic">
 
-<field name="hide_buttons" type="radio" class="btn-group btn-group-yesno" default="0" label="MOD_PHOCACART_SEARCH_FIELD_HIDE_BUTTONS_LABEL" description="MOD_PHOCACART_SEARCH_FIELD_HIDE_BUTTONS_DESC">
-	<option value="1">MOD_PHOCACART_SEARCH_YES</option>
-	<option value="0">MOD_PHOCACART_SEARCH_NO</option>
-</field>
+                <field name="search_options" type="radio" class="btn-group btn-group-yesno" default="0" label="MOD_PHOCACART_SEARCH_FIELD_ENABLE_SEARCH_OPTIONS_LABEL" description="MOD_PHOCACART_SEARCH_FIELD_ENABLE_SEARCH_OPTIONS_DESC">
+                    <option value="1">MOD_PHOCACART_SEARCH_YES</option>
+                    <option value="0">MOD_PHOCACART_SEARCH_NO</option>
+                </field>
 
-<field name="display_inner_icon" type="radio" class="btn-group btn-group-yesno" default="0" label="MOD_PHOCACART_SEARCH_FIELD_DISPLAY_INNER_ICON_LABEL" description="MOD_PHOCACART_SEARCH_FIELD_DISPLAY_INNER_ICON_DESC">
-	<option value="1">MOD_PHOCACART_SEARCH_YES</option>
-	<option value="0">MOD_PHOCACART_SEARCH_NO</option>
-</field>
+                <field name="hide_buttons" type="radio" class="btn-group btn-group-yesno" default="0" label="MOD_PHOCACART_SEARCH_FIELD_HIDE_BUTTONS_LABEL" description="MOD_PHOCACART_SEARCH_FIELD_HIDE_BUTTONS_DESC">
+                    <option value="1">MOD_PHOCACART_SEARCH_YES</option>
+                    <option value="0">MOD_PHOCACART_SEARCH_NO</option>
+                </field>
 
-<field name="moduleclass_sfx" type="textarea" rows="3" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC"/>
+                <field name="display_inner_icon" type="radio" class="btn-group btn-group-yesno" default="0" label="MOD_PHOCACART_SEARCH_FIELD_DISPLAY_INNER_ICON_LABEL" description="MOD_PHOCACART_SEARCH_FIELD_DISPLAY_INNER_ICON_DESC">
+                    <option value="1">MOD_PHOCACART_SEARCH_YES</option>
+                    <option value="0">MOD_PHOCACART_SEARCH_NO</option>
+                </field>
 
-<field name="load_component_media" type="radio" class="btn-group btn-group-yesno" default="0" label="MOD_PHOCACART_SEARCH_FIELD_LOAD_COMPONENT_MEDIA_LABEL" description="MOD_PHOCACART_SEARCH_FIELD_LOAD_COMPONENT_MEDIA_DESC">
-	<option value="1">MOD_PHOCACART_SEARCH_YES</option>
-	<option value="0">MOD_PHOCACART_SEARCH_NO</option>
-</field>
+                <field name="moduleclass_sfx" type="textarea" rows="3" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC"/>
 
-			</fieldset>	
-		</fields>
-	</config>
+                <field name="load_component_media" type="radio" class="btn-group btn-group-yesno" default="0" label="MOD_PHOCACART_SEARCH_FIELD_LOAD_COMPONENT_MEDIA_LABEL" description="MOD_PHOCACART_SEARCH_FIELD_LOAD_COMPONENT_MEDIA_DESC">
+                    <option value="1">MOD_PHOCACART_SEARCH_YES</option>
+                    <option value="0">MOD_PHOCACART_SEARCH_NO</option>
+                </field>
+
+                <field name="placeholder_text" type="text" default="" label="MOD_PHOCACART_SEARCH_FIELD_PLACEHOLDER_TEXT_LABEL" description="MOD_PHOCACART_SEARCH_FIELD_PLACEHOLDER_TEXT_DESC"/>
+
+            </fieldset>
+        </fields>
+    </config>
 
 	<updateservers>
 		<server type="extension" name="MOD_PHOCACART_SEARCH" priority="1"><![CDATA[https://raw.githubusercontent.com/PhocaCz/PhocaCartSearchModule/master/manifest.xml]]></server>
