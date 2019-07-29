@@ -37,6 +37,8 @@ $moduleclass_sfx 					= htmlspecialchars($params->get('moduleclass_sfx'), ENT_CO
 
 $document					= JFactory::getDocument();
 
+
+
 $search						= new PhocacartSearch();
 
 /* See documentation of Phoca Cart Filter module - commented code for description of functions:
@@ -59,8 +61,7 @@ $search						= new PhocacartSearch();
  * - only selected products (filtered products - they are filtered by filter parameter) - url stay the same with filter parameters
  */
 
-$document->addScript(JURI::root(true).'/media/com_phocacart/js/filter/jquery.ba-bbq.min.js');
-$document->addScript(JURI::root(true).'/media/com_phocacart/js/filter/filter.js');
+
 $isItemsView 				= PhocacartRoute::isItemsView();
 $urlItemsView 				= PhocacartRoute::getJsItemsRoute();// With category
 $urlItemsViewWithoutParams 	= PhocacartRoute::getJsItemsRouteWithoutParams();// Without category
@@ -71,12 +72,21 @@ $p['display_inner_icon']	= $params->get( 'display_inner_icon', 0 );
 $p['load_component_media']	= $params->get( 'load_component_media', 0 );
 $p['placeholder_text']	    = $params->get( 'placeholder_text', '' );
 
+
+$s = PhocacartRenderStyle::getStyles();
 if ($p['load_component_media'] == 1) {
 	$media = new PhocacartRenderMedia();
+	$media->loadBase();
 	$media->loadBootstrap();
+	$document->addScript(JURI::root(true).'/media/com_phocacart/js/filter/jquery.ba-bbq.min.js');
+	$document->addScript(JURI::root(true).'/media/com_phocacart/js/filter/filter.js');
+	$media->loadSpec();
 } else {
-	JHTML::stylesheet('media/com_phocacart/css/main.css' );
+
+	$document->addScript(JURI::root(true).'/media/com_phocacart/js/filter/jquery.ba-bbq.min.js');
+	$document->addScript(JURI::root(true).'/media/com_phocacart/js/filter/filter.js');
 }
+
 
 //$jsPart1 = 'var currentUrlParams	= jQuery.param.querystring();'
 //		  .'document.location 		= jQuery.param.querystring(urlItemsView, currentUrlParams, 2);';
