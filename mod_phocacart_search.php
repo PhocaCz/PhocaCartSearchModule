@@ -34,10 +34,7 @@ $lang->load('com_phocacart');
 
 $moduleclass_sfx 					= htmlspecialchars($params->get('moduleclass_sfx'), ENT_COMPAT, 'UTF-8');
 
-
 $document					= JFactory::getDocument();
-
-
 
 $search						= new PhocacartSearch();
 
@@ -91,11 +88,11 @@ if ($p['load_component_media'] == 1) {
 //$jsPart1 = 'var currentUrlParams	= jQuery.param.querystring();'
 //		  .'document.location 		= jQuery.param.querystring(urlItemsView, currentUrlParams, 2);';
 //$jsPart1 = 'document.location 		= urlItemsView';
-$jsPart2 = PhocacartRenderJs::renderLoaderFullOverlay();
+/*$jsPart2 = PhocacartRenderJs::renderLoaderFullOverlay();
 
 $js	  = array();
 $js[] = ' ';
-$js[] = '/* Function phChangeSearch*/ ';
+$js[] = '/* Function phChangeSearch ';
 $js[] = 'function phChangeSearch(param, value, formAction) {';
 $js[] = '   var isItemsView		= '.(int)$isItemsView.';';
 $js[] = '   var urlItemsView	= \''.$urlItemsView.'\';';
@@ -120,8 +117,11 @@ $js[] = '      phA = phRemoveFilter(param, value, isItemsView, urlItemsView, 1,0
 $js[] = '   }';
 $js[] = '	'.$jsPart2;
 $js[] = '}';
-$js[] = ' ';
+$js[] = ' ';*/
 
-$document->addScriptDeclaration(implode("\n", $js));
+$app->getDocument()->addScriptOptions('phVarsModPhocacartSearch', array('isItemsView' => (int)$isItemsView, 'urlItemsView' => $urlItemsView, 'urlItemsViewWithoutParams' => $urlItemsViewWithoutParams));
+$app->getDocument()->addScriptOptions('phParamsModPhocacartSearch', array('searchOptions' => $p['search_options']));
+
+//$document->addScriptDeclaration(implode("\n", $js));
 require(JModuleHelper::getLayoutPath('mod_phocacart_search'));
 ?>
