@@ -26,6 +26,8 @@ Phoca Cart Search Module - a Joomla! CMS module which displays searching form - 
 
 
 
+
+
 ## Support
 
 [Phoca Forum](https://www.phoca.cz/forum)
@@ -54,7 +56,7 @@ Phoca Cart Search Module - a Joomla! CMS module which displays searching form - 
 
 ## Version
 
-3.4.0
+3.5.0
 
 
 

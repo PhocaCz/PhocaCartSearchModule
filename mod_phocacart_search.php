@@ -9,9 +9,9 @@
 
 defined('_JEXEC') or die;// no direct access
 
-if (!JComponentHelper::isEnabled('com_phocacart', true)) {
+if (!JComponentHelper::isEnabled('com_phocacart')) {
 	$app = JFactory::getApplication();
-	$app->enqueueMessage(JText::_('Phoca Cart Error'), JText::_('Phoca Cart is not installed on your system'), 'error');
+	$app->enqueueMessage(JText::_('Phoca Cart Error') . ' - ' . JText::_('Phoca Cart is not installed on your system'), 'error');
 	return;
 }
 
@@ -33,10 +33,16 @@ $lang = JFactory::getLanguage();
 $lang->load('com_phocacart');
 
 $moduleclass_sfx 					= htmlspecialchars($params->get('moduleclass_sfx'), ENT_COMPAT, 'UTF-8');
+$document							= JFactory::getDocument();
 
-$document					= JFactory::getDocument();
-
-$search						= new PhocacartSearch();
+$search								= new PhocacartSearch();
+$search->ajax						= 0;
+$search->search_options 			= $params->get( 'search_options', 0 );
+$search->hide_buttons 				= $params->get( 'hide_buttons', 0 );
+$search->display_inner_icon 		= $params->get( 'display_inner_icon', 0 );
+$search->load_component_media 		= $params->get( 'load_component_media', 0 );
+$search->placeholder_text 			= $params->get( 'placeholder_text', '' );
+$search->display_active_parameters 	= $params->get( 'display_active_parameters', 0 );
 
 /* See documentation of Phoca Cart Filter module - commented code for description of functions:
  * - phSetFilter
@@ -63,25 +69,13 @@ $isItemsView 				= PhocacartRoute::isItemsView();
 $urlItemsView 				= PhocacartRoute::getJsItemsRoute();// With category
 $urlItemsViewWithoutParams 	= PhocacartRoute::getJsItemsRouteWithoutParams();// Without category
 
-$p['search_options']		= $params->get( 'search_options', 0 );
-$p['hide_buttons']			= $params->get( 'hide_buttons', 0 );
-$p['display_inner_icon']	= $params->get( 'display_inner_icon', 0 );
-$p['load_component_media']	= $params->get( 'load_component_media', 0 );
-$p['placeholder_text']	    = $params->get( 'placeholder_text', '' );
 
-
+$media = PhocacartRenderMedia::getInstance('main');
 $s = PhocacartRenderStyle::getStyles();
-if ($p['load_component_media'] == 1) {
-	$media = new PhocacartRenderMedia();
+if ($search->load_component_media  == 1) {
 	$media->loadBase();
 	$media->loadBootstrap();
-	$document->addScript(JURI::root(true).'/media/com_phocacart/js/filter/jquery.ba-bbq.min.js');
-	$document->addScript(JURI::root(true).'/media/com_phocacart/js/filter/filter.js');
 	$media->loadSpec();
-} else {
-
-	$document->addScript(JURI::root(true).'/media/com_phocacart/js/filter/jquery.ba-bbq.min.js');
-	$document->addScript(JURI::root(true).'/media/com_phocacart/js/filter/filter.js');
 }
 
 
@@ -119,8 +113,8 @@ $js[] = '	'.$jsPart2;
 $js[] = '}';
 $js[] = ' ';*/
 
-$app->getDocument()->addScriptOptions('phVarsModPhocacartSearch', array('isItemsView' => (int)$isItemsView, 'urlItemsView' => $urlItemsView, 'urlItemsViewWithoutParams' => $urlItemsViewWithoutParams));
-$app->getDocument()->addScriptOptions('phParamsModPhocacartSearch', array('searchOptions' => $p['search_options']));
+$document->addScriptOptions('phVarsModPhocacartSearch', array('isItemsView' => (int)$isItemsView, 'urlItemsView' => $urlItemsView, 'urlItemsViewWithoutParams' => $urlItemsViewWithoutParams));
+$document->addScriptOptions('phParamsModPhocacartSearch', array('searchOptions' => (int)$search->search_options, 'displayActiveParameters' => (int)$search->display_active_parameters));
 
 //$document->addScriptDeclaration(implode("\n", $js));
 require(JModuleHelper::getLayoutPath('mod_phocacart_search'));

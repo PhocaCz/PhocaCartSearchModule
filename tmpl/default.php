@@ -9,7 +9,7 @@
 defined('_JEXEC') or die;
 
 echo '<div class="ph-search-box'.$moduleclass_sfx .'">';
-echo $search->renderSearch($p);
+echo $search->renderSearch();
 echo '</div>';
 
 ?>
