@@ -40,7 +40,7 @@ $search->ajax						= 0;
 $search->search_options 			= $params->get( 'search_options', 0 );
 $search->hide_buttons 				= $params->get( 'hide_buttons', 0 );
 $search->display_inner_icon 		= $params->get( 'display_inner_icon', 0 );
-$search->load_component_media 		= $params->get( 'load_component_media', 0 );
+$search->load_component_media 		= $params->get( 'load_component_media', 1 );
 $search->placeholder_text 			= $params->get( 'placeholder_text', '' );
 $search->display_active_parameters 	= $params->get( 'display_active_parameters', 0 );
 
@@ -70,9 +70,10 @@ $urlItemsView 				= PhocacartRoute::getJsItemsRoute();// With category
 $urlItemsViewWithoutParams 	= PhocacartRoute::getJsItemsRouteWithoutParams();// Without category
 
 
-$media = PhocacartRenderMedia::getInstance('main');
+
 $s = PhocacartRenderStyle::getStyles();
 if ($search->load_component_media  == 1) {
+	$media = PhocacartRenderMedia::getInstance('main');
 	$media->loadBase();
 	$media->loadBootstrap();
 	$media->loadSpec();

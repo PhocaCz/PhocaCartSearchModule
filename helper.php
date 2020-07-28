@@ -33,10 +33,10 @@ class ModPhocaCartSearchHelper
 		$search->search_options 			= $params->get( 'search_options', 0 );
 		$search->hide_buttons 				= $params->get( 'hide_buttons', 0 );
 		$search->display_inner_icon 		= $params->get( 'display_inner_icon', 0 );
-		$search->load_component_media 		= $params->get( 'load_component_media', 0 );
+		$search->load_component_media 		= $params->get( 'load_component_media', 1 );
 		$search->placeholder_text 			= $params->get( 'placeholder_text', '' );
 		$search->display_active_parameters 	= $params->get( 'display_active_parameters', 0 );
-		
+
 		echo $search->renderSearch();
 
 	}
