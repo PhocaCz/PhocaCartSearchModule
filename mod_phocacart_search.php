@@ -118,5 +118,5 @@ $document->addScriptOptions('phVarsModPhocacartSearch', array('isItemsView' => (
 $document->addScriptOptions('phParamsModPhocacartSearch', array('searchOptions' => (int)$search->search_options, 'displayActiveParameters' => (int)$search->display_active_parameters));
 
 //$document->addScriptDeclaration(implode("\n", $js));
-require(JModuleHelper::getLayoutPath('mod_phocacart_search'));
+require(JModuleHelper::getLayoutPath('mod_phocacart_search', $params->get('layout', 'default')));
 ?>

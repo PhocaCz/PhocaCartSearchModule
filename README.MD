@@ -2,7 +2,7 @@
 
 
 
-![Phoca Cart Search Module](https://github.com/PhocaCz/PhocaCartSearchModule/blob/master/mod_phocacart_search.png)
+![Phoca Cart Search Module](https://github.com/PhocaCz/PhocaCartSearchModule/blob/master/mod_phocacart_search.png?raw=true)
 
 # Phoca Cart Search Module
 
@@ -56,7 +56,7 @@ Phoca Cart Search Module - a Joomla! CMS module which displays searching form - 
 
 ## Version
 
-3.5.4
+3.5.5
 
 
 
