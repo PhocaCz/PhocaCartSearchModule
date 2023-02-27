@@ -32,7 +32,7 @@ $lang = JFactory::getLanguage();
 //$lang->load('com_phocacart.sys');
 $lang->load('com_phocacart');
 
-$moduleclass_sfx 					= htmlspecialchars($params->get('moduleclass_sfx'), ENT_COMPAT, 'UTF-8');
+$moduleclass_sfx 					= htmlspecialchars((string)$params->get('moduleclass_sfx', ''), ENT_COMPAT, 'UTF-8');
 $document							= JFactory::getDocument();
 
 $search								= new PhocacartSearch();
@@ -68,7 +68,7 @@ $search->display_active_parameters 	= $params->get( 'display_active_parameters',
 $isItemsView 				= PhocacartRoute::isItemsView();
 $urlItemsView 				= PhocacartRoute::getJsItemsRoute();// With category
 $urlItemsViewWithoutParams 	= PhocacartRoute::getJsItemsRouteWithoutParams();// Without category
-
+$urlItemsView				= PhocaCartroute::cleanUrlItemsView($urlItemsView);
 
 
 $s = PhocacartRenderStyle::getStyles();

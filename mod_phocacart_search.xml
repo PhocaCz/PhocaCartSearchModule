@@ -2,12 +2,12 @@
 <extension type="module" client="site" method="upgrade" version="4.0">
 	<name>mod_phocacart_search</name>
 	<author>Jan Pavelka (www.phoca.cz)</author>
-	<creationDate>21/02/2022</creationDate>
+	<creationDate>28/02/2023</creationDate>
 	<authorEmail></authorEmail>
 	<authorUrl>https://www.phoca.cz</authorUrl>
 	<copyright>Jan Pavelka</copyright>
 	<license>GNU/GPL</license>
-	<version>4.0.0</version>
+	<version>4.0.6Beta</version>
 	<description>MOD_PHOCACART_SEARCH_DESCRIPTION</description>
 	<projectName>PhocaCartSearchModule</projectName>
 
@@ -16,6 +16,7 @@
 		<filename module="mod_phocacart_search">helper.php</filename>
 		<filename module="mod_phocacart_search">index.html</filename>
 		<filename module="mod_phocacart_search">mod_phocacart_search.php</filename>
+		<filename module="mod_phocacart_search">manifest.xml</filename>
 	</files>
 
 	<languages>
