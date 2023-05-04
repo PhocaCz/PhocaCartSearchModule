@@ -117,6 +117,7 @@ $js[] = ' ';*/
 $document->addScriptOptions('phVarsModPhocacartSearch', array('isItemsView' => (int)$isItemsView, 'urlItemsView' => $urlItemsView, 'urlItemsViewWithoutParams' => $urlItemsViewWithoutParams));
 $document->addScriptOptions('phParamsModPhocacartSearch', array('searchOptions' => (int)$search->search_options, 'displayActiveParameters' => (int)$search->display_active_parameters));
 
+
 //$document->addScriptDeclaration(implode("\n", $js));
 require(JModuleHelper::getLayoutPath('mod_phocacart_search', $params->get('layout', 'default')));
 ?>
