@@ -14,17 +14,17 @@ class ModPhocaCartSearchHelper
 	public static function getAjax() {
 
 		jimport('joomla.application.module.helper');
-		if (!JComponentHelper::isEnabled('com_phocacart')) {
+		if (!ComponentHelper::isEnabled('com_phocacart')) {
 
-			echo '<div class="alert alert-error alert-danger">'.JText::_('Phoca Cart Error') . ' - ' . JText::_('Phoca Cart is not installed on your system').'</div>';
+			echo '<div class="alert alert-error alert-danger">'.Text::_('Phoca Cart Error') . ' - ' . Text::_('Phoca Cart is not installed on your system').'</div>';
 			return;
 		}
 
         JLoader::registerPrefix('Phocacart', JPATH_ADMINISTRATOR . '/components/com_phocacart/libraries/phocacart');
-		$lang = JFactory::getLanguage();
+		$lang = Factory::getLanguage();
 		$lang->load('com_phocacart');
 
-		$module = JModuleHelper::getModule('phocacart_search');
+		$module = ModuleHelper::getModule('phocacart_search');
 		$params = new JRegistry();
 		$params->loadString($module->params);
 
