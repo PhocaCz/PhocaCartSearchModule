@@ -7,6 +7,12 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
  */
 
+use Joomla\CMS\Component\ComponentHelper;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Helper\ModuleHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\Registry\Registry;
+
 defined('_JEXEC') or die;
 
 class ModPhocaCartSearchHelper
@@ -14,18 +20,28 @@ class ModPhocaCartSearchHelper
 	public static function getAjax() {
 
 		jimport('joomla.application.module.helper');
-		if (!ComponentHelper::isEnabled('com_phocacart')) {
 
-			echo '<div class="alert alert-error alert-danger">'.Text::_('Phoca Cart Error') . ' - ' . Text::_('Phoca Cart is not installed on your system').'</div>';
+        $app = Factory::getApplication();
+        $document = Factory::getDocument();
+
+        if (!ComponentHelper::isEnabled('com_phocacart')) {
+            echo '<div class="alert alert-error alert-danger">'.Text::_('Phoca Cart Error') . ' - ' . Text::_('Phoca Cart is not installed on your system').'</div>';
 			return;
-		}
+        }
+        if (file_exists(JPATH_ADMINISTRATOR . '/components/com_phocacart/libraries/bootstrap.php')) {
+            // Joomla 5 and newer
+            require_once(JPATH_ADMINISTRATOR . '/components/com_phocacart/libraries/bootstrap.php');
+        } else {
+            // Joomla 4
+            JLoader::registerPrefix('Phocacart', JPATH_ADMINISTRATOR . '/components/com_phocacart/libraries/phocacart');
+        }
 
-        JLoader::registerPrefix('Phocacart', JPATH_ADMINISTRATOR . '/components/com_phocacart/libraries/phocacart');
+
 		$lang = Factory::getLanguage();
 		$lang->load('com_phocacart');
 
 		$module = ModuleHelper::getModule('phocacart_search');
-		$params = new JRegistry();
+		$params = new Registry();
 		$params->loadString($module->params);
 
 		$search								= new PhocacartSearch();

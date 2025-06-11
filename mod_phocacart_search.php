@@ -8,18 +8,27 @@
  */
 
 defined('_JEXEC') or die;// no direct access
+
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Helper\ModuleHelper;
+
+$app = Factory::getApplication();
+$document = Factory::getDocument();
 
 if (!ComponentHelper::isEnabled('com_phocacart')) {
 	$app = Factory::getApplication();
 	$app->enqueueMessage(Text::_('Phoca Cart Error') . ' - ' . Text::_('Phoca Cart is not installed on your system'), 'error');
 	return;
 }
-
-JLoader::registerPrefix('Phocacart', JPATH_ADMINISTRATOR . '/components/com_phocacart/libraries/phocacart');
+if (file_exists(JPATH_ADMINISTRATOR . '/components/com_phocacart/libraries/bootstrap.php')) {
+	// Joomla 5 and newer
+	require_once(JPATH_ADMINISTRATOR . '/components/com_phocacart/libraries/bootstrap.php');
+} else {
+	// Joomla 4
+	JLoader::registerPrefix('Phocacart', JPATH_ADMINISTRATOR . '/components/com_phocacart/libraries/phocacart');
+}
 
 /*
 if (! class_exists('PhocacartLoader')) {
@@ -37,7 +46,6 @@ $lang = Factory::getLanguage();
 $lang->load('com_phocacart');
 
 $moduleclass_sfx 					= htmlspecialchars((string)$params->get('moduleclass_sfx', ''), ENT_COMPAT, 'UTF-8');
-$document							= Factory::getDocument();
 
 $search								= new PhocacartSearch();
 $search->ajax						= 0;

@@ -39,4 +39,24 @@
 		<targetplatform name="joomla" version="4\.*"/>
 		<client>site</client>
 	</update>
+	<update>
+		<name><![CDATA[ Phoca Cart Search Module ]]></name>
+		<description><![CDATA[ Phoca Cart Search Module - a Joomla! CMS module which displays searching form - to search Phoca Cart products. ]]></description>
+		<element>mod_phocacart_search</element>
+		<type>module</type>
+		<version>5.1.1</version>
+		<infourl title="Phoca Cart Search Module 5.1.1">https://www.phoca.cz/</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaCartSearchModule/releases/download/5.1.1/mod_phocacart_search_v5.1.1.zip</downloadurl>
+		</downloads>
+		<sha512>684f815149a0f5ea3328d5919f5b608bf0097eb6082d07002620ae4b1458fdade12eb490d760aa801701dfd0418f5e48beecabb57f153f92f621413c008d7fb6</sha512>
+		<tags>
+			<tag>stable</tag>
+		</tags>
+		<maintainer><![CDATA[ Phoca.cz ]]></maintainer>
+		<maintainerurl>https://www.phoca.cz/</maintainerurl>
+		<section>Updates</section>
+		<targetplatform name="joomla" version="5\.*"/>
+		<client>site</client>
+	</update>
 </updates>
